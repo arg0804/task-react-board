@@ -1,0 +1,46 @@
+.board-display {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 20px auto;
+  width: 1830px;
+  height: 3630px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.board {
+  background-color: #f7f7f7;
+}
+
+.cut {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.block{
+  background-color: rgba(225, 0, 0, 0.3);
+}
+
+.block-row{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  gap: 5px;
+  top: 0;
+}
+
+.selected-image{
+  width: 1830px;
+  height: 3630px;
+}

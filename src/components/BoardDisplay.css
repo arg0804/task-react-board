@@ -2,7 +2,6 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
   margin: 20px auto;
   width: 1830px;
   height: 3630px;
@@ -28,6 +27,7 @@
 
 .block{
   background-color: rgba(225, 0, 0, 0.3);
+  float: left;
 }
 
 .block-row{
@@ -36,7 +36,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
-  gap: 5px;
+  gap: 2px;
   top: 0;
 }
 

@@ -8,56 +8,49 @@ function binPacking(cuts, binWidth, binHeight) {
 
   const bins = [{ width: binWidth, height: binHeight, blocks: [] }];
   const smallBlocks = [];
-
   sortedCuts.forEach((cut) => {
-    for (let i = 0; i < cut.quantity; i++) {
-      let bestFitBin = null;
 
-      if (cut.width > binWidth || cut.height > binHeight) {
-        smallBlocks.push(cut);
-        continue;
+for (let i = 0; i < cut.quantity; i++) {
+  let bestFitBin = null;
+    if (cut.width > binWidth || cut.height > binHeight) {
+      smallBlocks.push(cut);
+      continue;
       }
 
-      for (const bin of bins) {
-        if (cut.width <= bin.width && cut.height <= bin.height) {
-          if (!bestFitBin || (bin.width - cut.width) * (bin.height - cut.height) <
-              (bestFitBin.width - cut.width) * (bestFitBin.height - cut.height)) {
-            bestFitBin = bin;
-          }
-        }
-      }
-
-      if (bestFitBin) {
-        const newBlock = { width: cut.width, height: cut.height };
-        bestFitBin.blocks.push(newBlock);
-
-        bestFitBin.width -= cut.width;
-        bestFitBin.height -= cut.height;
-      } else {
-        if (cut.width <= binWidth && cut.height <= binHeight) {
-          for (const bin of bins) {
-            if (bin.width >= cut.width && bin.height >= cut.height) {
-              const newBlock = { width: cut.width, height: cut.height };
-              bin.blocks.push(newBlock);
-
-              bin.width -= cut.width;
-              bin.height -= cut.height;
-              break;
-            }
-          }
-        }
-
-        if (!bestFitBin) {
-          // If there's no bin that can fit the cut, create a new bin
-          const newBin = { width: binWidth, height: binHeight, blocks: [] };
-          newBin.blocks.push({ width: cut.width, height: cut.height });
-          bins.push(newBin);
+    for (const bin of bins) {
+      if (cut.width <= bin.width && cut.height <= bin.height) {
+        if (!bestFitBin || (bin.width - cut.width) * (bin.height - cut.height) <
+            (bestFitBin.width - cut.width) * (bestFitBin.height - cut.height)) {
+          bestFitBin = bin;
         }
       }
     }
-  });
+    if (bestFitBin) {
+      const newBlock = { width: cut.width, height: cut.height };
+      bestFitBin.blocks.push(newBlock);
+      bestFitBin.width -= cut.width;
+      bestFitBin.height -= cut.height;
+    } else {
+      if (cut.width <= binWidth && cut.height <= binHeight) {
+        for (const bin of bins) {
+          if (bin.width >= cut.width && bin.height >= cut.height) {
+            const newBlock = { width: cut.width, height: cut.height };
+            bin.blocks.push(newBlock);
+            bin.width -= cut.width;
+            bin.height -= cut.height;
+            break;
+          }
+        }
+      }
+      if (!bestFitBin) {
+        const newBin = { width: binWidth, height: binHeight, blocks: [] };
+        newBin.blocks.push({ width: cut.width, height: cut.height });
+        bins.push(newBin);
+      }
+    }
+  }
+});
 
-  // Add small blocks to fill empty spaces
   smallBlocks.forEach((cut) => {
     for (const bin of bins) {
       if (cut.width <= bin.width && cut.height <= bin.height) {
@@ -73,12 +66,6 @@ function binPacking(cuts, binWidth, binHeight) {
 
   return bins;
 }
-
-
-
-
-
-
 
 
 function BoardDisplay({ cuts, boardWidth, boardHeight, selectedImage }) {

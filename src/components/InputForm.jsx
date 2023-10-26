@@ -16,7 +16,7 @@ function InputForm({ addCut, cuts, setCuts, onImageSelect }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [blackImage, greenImage, brownImage, paintedImage];
-
+ 
   const maxAllowedCuts = 10;
 
   const addBlockHandler = useCallback(() => {
@@ -81,69 +81,69 @@ function InputForm({ addCut, cuts, setCuts, onImageSelect }) {
     }
   };
 
-  return (
-    <div className="head-input">
-      <div className={classNames('InputForm', 'input-form-container')}>
-        <div className="image-selection">
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`image ${index + 1}`}
-              onClick={() => onImageSelect(image)}
-              className={classNames('image', { 'selectedImage': image === selectedImage })}
-            />
-          ))}
+return (
+  <div className="head-input">
+    <div className={classNames('InputForm', 'input-form-container')}>
+      <div className="image-selection">
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`image ${index + 1}`}
+            onClick={() => onImageSelect(image)}
+            className={classNames('image', { 'selectedImage': image === selectedImage })}
+          />
+        ))}
+      </div>
+      <form onSubmit={(e) => {e.preventDefault(); addBlockHandler();}}>
+        <div className={classNames('input-group')}>
+          <label className={classNames('label')}>Width:</label>
+          <input
+            type="number"
+            className={classNames('input')}
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
         </div>
-        <form onSubmit={(e) => {e.preventDefault(); addBlockHandler();}}>
-          <div className={classNames('input-group')}>
-            <label className={classNames('label')}>Width:</label>
-            <input
-              type="number"
-              className={classNames('input')}
-              value={width}
-              onChange={(e) => setWidth(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-          <div className={classNames('input-group')}>
-            <label className={classNames('label')}>Height:</label>
-            <input
-              type="number"
-              className={classNames('input')}
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-          <div className={classNames('input-group')}>
-            <label className={classNames('label')}>Quantity:</label>
-            <input
-              type="number"
-              className={classNames('input')}
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-          <button className={classNames('button')} type="submit">
-            Add Blocks
-          </button>
-        </form>
-        <div>
-          {inputData.map((data, index) => (
-            <div key={index}>
-              <label htmlFor="">
-                {data.width}px, {data.height}px
-              </label>
-              <button className='edit-btn' onClick={() => editInput(index)}>Edit</button>
-              <button className='delete-btn' onClick={() => deleteInput(index)}>Delete</button>
-            </div>
-          ))}
+        <div className={classNames('input-group')}>
+          <label className={classNames('label')}>Height:</label>
+          <input
+            type="number"
+            className={classNames('input')}
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
         </div>
+        <div className={classNames('input-group')}>
+          <label className={classNames('label')}>Quantity:</label>
+          <input
+            type="number"
+            className={classNames('input')}
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+        </div>
+        <button className={classNames('button')} type="submit">
+          Add Blocks
+        </button>
+      </form>
+      <div>
+        {inputData.map((data, index) => (
+          <div key={index}>
+            <label htmlFor="">
+              {data.width}px, {data.height}px
+            </label>
+            <button className='edit-btn' onClick={() => editInput(index)}>Edit</button>
+            <button className='delete-btn' onClick={() => deleteInput(index)}>Delete</button>
+          </div>
+        ))}
       </div>
     </div>
-  );
+  </div>
+ );
 }
 
 export default InputForm;
